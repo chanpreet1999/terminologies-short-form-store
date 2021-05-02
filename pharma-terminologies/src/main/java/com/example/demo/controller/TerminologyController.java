@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -65,5 +67,15 @@ public class TerminologyController {
 	public String deleteTerminology(@RequestParam("id") Integer id) {
 		terminologyService.deleteById(id);
 		return "redirect:/getAllTerminologies";
+	}
+
+//	@ResponseBody
+	@RequestMapping(value = "searchTerminology", method = RequestMethod.GET)
+	public String searchTerminology(@RequestParam("keyword") String searchKeyword, ModelMap modelMap) {
+//		terminologyService.deleteById(id);
+//		return "redirect:/getAllTerminologies";
+		List<Terminology> matchingEntries = terminologyService.getSearchResult(searchKeyword);
+		modelMap.put("terminologies", matchingEntries);
+		return "show-terminologies-list";
 	}
 }

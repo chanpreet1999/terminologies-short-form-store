@@ -59,4 +59,11 @@ public class TerminologyService implements ITerminologyService, UserDetailsServi
 		terminologyRepository.updateTerminology(terminologyBean.getShortForm(), terminologyBean.getFullForm(),
 				terminologyBean.getDescription(), terminologyBean.getId());
 	}
+
+	@Override
+	public List<Terminology> getSearchResult(String searchKeyword) {
+
+		return terminologyRepository.searchTerminologyIgnoreCase(searchKeyword.toLowerCase());
+	}
+
 }

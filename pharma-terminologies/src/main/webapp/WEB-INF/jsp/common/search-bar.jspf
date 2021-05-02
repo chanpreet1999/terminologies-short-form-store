@@ -1,0 +1,18 @@
+	<!-- search box -->
+	<form action="/searchTerminology" method="GET"> 
+	  <div class="row">
+	    <div >
+	      <div class="input-group">
+	        <input type="text" class="form-control" placeholder="Search" id="keyword" name="keyword" />
+	       <!-- 
+	        <span class="help-block">Enter any terminology to search for.</span>
+	         -->
+	        <div class="input-group-btn">
+	          <button class="btn btn-primary " type="submit" >
+	            <span class="glyphicon glyphicon-search" ></span>
+	          </button>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</form>

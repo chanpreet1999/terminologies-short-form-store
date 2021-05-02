@@ -15,4 +15,6 @@ public interface ITerminologyService {
 	void deleteById(Integer id);
 
 	void updateTerminology(Terminology terminologyBean);
+
+	List<Terminology> getSearchResult(String searchKeyword);
 }
