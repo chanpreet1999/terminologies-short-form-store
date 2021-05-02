@@ -1,8 +1,8 @@
 package com.example.demo.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,12 +20,6 @@ public class TerminologyService implements ITerminologyService, UserDetailsServi
 
 	TerminologyRepository terminologyRepository;
 
-	static List<Terminology> terminologyList = new ArrayList<>();
-	static {
-		terminologyList.add(new Terminology(1, "ABC", "test", "this is a test"));
-		terminologyList.add(new Terminology(2, "Rx", "prescription", "this is a test"));
-	}
-
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
@@ -34,13 +28,11 @@ public class TerminologyService implements ITerminologyService, UserDetailsServi
 
 	@Override
 	public List<Terminology> getAllTerminologies() {
-		return terminologyRepository.findAll();
-//		return terminologyList;
+		return terminologyRepository.findAll(Sort.by(Sort.Direction.ASC, "shortForm"));
 	}
 
 	@Override
 	public void createNewTerminology(Terminology terminologyBean) {
-//		terminologyList.add(termin ologyBean);
 		terminologyRepository.save(terminologyBean);
 	}
 
@@ -62,7 +54,6 @@ public class TerminologyService implements ITerminologyService, UserDetailsServi
 
 	@Override
 	public List<Terminology> getSearchResult(String searchKeyword) {
-
 		return terminologyRepository.searchTerminologyIgnoreCase(searchKeyword.toLowerCase());
 	}
 

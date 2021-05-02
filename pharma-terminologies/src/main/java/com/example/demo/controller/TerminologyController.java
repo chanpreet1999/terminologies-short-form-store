@@ -16,7 +16,6 @@ import com.example.demo.service.interfaces.ITerminologyService;
 import lombok.AllArgsConstructor;
 
 @Controller
-//@RequestMapping("/api/v1")
 @AllArgsConstructor
 public class TerminologyController {
 
@@ -57,23 +56,20 @@ public class TerminologyController {
 		return "redirect:/getAllTerminologies";
 	}
 
-//	@PostMapping(path = "terminology/{id}")
-//	public String updateTerminology( @PathVariable("id") Integer id )
-//	{
-//		return "";
-//	}
-
 	@RequestMapping(value = "deleteTerminology", method = RequestMethod.GET)
 	public String deleteTerminology(@RequestParam("id") Integer id) {
 		terminologyService.deleteById(id);
 		return "redirect:/getAllTerminologies";
 	}
 
-//	@ResponseBody
 	@RequestMapping(value = "searchTerminology", method = RequestMethod.GET)
 	public String searchTerminology(@RequestParam("keyword") String searchKeyword, ModelMap modelMap) {
-//		terminologyService.deleteById(id);
-//		return "redirect:/getAllTerminologies";
+
+		searchKeyword = searchKeyword.trim();
+
+		if (searchKeyword == null || searchKeyword == "")
+			return "redirect:/getAllTerminologies";
+
 		List<Terminology> matchingEntries = terminologyService.getSearchResult(searchKeyword);
 		modelMap.put("terminologies", matchingEntries);
 		return "show-terminologies-list";
